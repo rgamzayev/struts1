@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: Globals.java 664558 2008-06-08 21:28:09Z pbenedict $
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -25,7 +25,7 @@ import java.io.Serializable;
 /**
  * Global manifest constants for the entire Struts Framework.
  *
- * @version $Rev$ $Date: 2005-06-18 20:27:26 -0400 (Sat, 18 Jun 2005)
+ * @version $Rev: 664558 $ $Date: 2005-06-18 20:27:26 -0400 (Sat, 18 Jun 2005)
  *          $
  */
 public class Globals implements Serializable {
@@ -225,4 +225,7 @@ public class Globals implements Serializable {
      * The property under which a transaction token is reported.
      */
     public static final String TOKEN_KEY = TAGLIB_PACKAGE + ".TOKEN";
+    
+    public static final String DATA_SOURCE_KEY =
+    		"org.apache.struts.action.DATA_SOURCE";
 }

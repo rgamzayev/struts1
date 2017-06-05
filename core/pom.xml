@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-    $Id$
+    $Id: pom.xml 663497 2008-06-05 08:13:33Z niallp $
 
     Licensed to the Apache Software Foundation (ASF) under one or more
     contributor license agreements.  See the NOTICE file distributed with
@@ -107,14 +107,17 @@
     </profiles>
 
     <dependencies>
+    
+        <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.9.3</version>
+    </dependency>
         <dependency>
             <groupId>antlr</groupId>
             <artifactId>antlr</artifactId>
         </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
+ 
         <dependency>
             <groupId>commons-chain</groupId>
             <artifactId>commons-chain</artifactId>

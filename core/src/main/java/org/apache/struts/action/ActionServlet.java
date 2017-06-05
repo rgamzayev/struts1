@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: ActionServlet.java 664382 2008-06-07 20:45:12Z pbenedict $
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,6 +19,27 @@
  * under the License.
  */
 package org.apache.struts.action;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.MissingResourceException;
+import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.UnavailableException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -58,25 +79,6 @@ import org.apache.struts.util.MessageResourcesFactory;
 import org.apache.struts.util.ModuleUtils;
 import org.apache.struts.util.RequestUtils;
 import org.xml.sax.SAXException;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.MissingResourceException;
 
 /**
  * <p><strong>ActionServlet</strong> provides the "controller" in the
@@ -198,7 +200,7 @@ import java.util.MissingResourceException;
  *
  * </ul>
  *
- * @version $Rev$ $Date: 2005-10-14 19:54:16 -0400 (Fri, 14 Oct 2005)
+ * @version $Rev: 664382 $ $Date: 2005-10-14 19:54:16 -0400 (Fri, 14 Oct 2005)
  *          $
  */
 public class ActionServlet extends HttpServlet {
@@ -1752,7 +1754,17 @@ public class ActionServlet extends HttpServlet {
      */
     protected void initOther()
         throws ServletException {
-        String value;
+    	
+		HashSet suppressProperties = new HashSet();
+		suppressProperties.add("class");
+		suppressProperties.add("multipartRequestHandler");
+		suppressProperties.add("resultValueMap");
+		
+		PropertyUtils.addBeanIntrospector(
+                   new SuppressPropertiesBeanIntrospector(suppressProperties));
+		PropertyUtils.clearDescriptors();
+		
+		String value;
 
         value = getServletConfig().getInitParameter("config");
 
